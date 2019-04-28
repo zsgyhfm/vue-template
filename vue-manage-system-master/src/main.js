@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import axios from 'axios';
+// import axios from 'axios';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import './assets/css/theme-green/index.css';       // 浅绿色主题
@@ -12,13 +12,14 @@ import {
     longStackSupport
 } from 'q';
 import Vuex from 'vuex'
+import Axios from 'axios';
 
 Vue.use(Vuex);
 Vue.config.productionTip = false
 Vue.use(ElementUI, {
     size: 'small'
 });
-Vue.prototype.$axios = axios;
+Vue.prototype.$axios = Axios;
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
@@ -82,11 +83,18 @@ const store = new Vuex.Store({
     //异步提交commit ，并不是直接修改状态，而是提交commit
     // 可以包含异步操作
     actions:{
-        login({commit,dispatch}){
+        login({commit,dispatch},data){
             //异步提交login操作
             // dispatch("login").then(()=>{console.log('登陆成功');})
-            console.log("Action -login");
+            console.log("Action -login",data);
             commit("login")
+
+            // 这里提交登陆请求
+            // Axios.post("",{...data}).then(()=>{
+            //     //提交登陆成功commit
+            // }).catch(()=>{
+            //     //提交登陆失败的commit
+            // })
         }
     }
 })

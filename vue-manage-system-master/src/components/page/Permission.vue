@@ -18,6 +18,20 @@
     export default {
         data: function(){
             return {}
+        },
+        computed:{
+            role:sessionStorage.getItem("ms_username")
+        },
+        beforeRouteEnter(to,from,next){
+            console.log("权限测试",to)
+            //判定当前角色
+            console.log(sessionStorage.getItem("ms_username"))
+            if(sessionStorage.getItem("ms_username")!="admin"){
+                next("/404")
+            }else{
+                next()
+            }
+
         }
     }
 </script>

@@ -55,7 +55,7 @@ export default {
           // 登陆请求
           console.log("登陆表单", this.ruleForm);
           //登陆成功后修改store状态 这里要异步提交
-          console.log(this.$store.dispatch("login"));
+          console.log(this.$store.dispatch({type:"login",data:123}));
           // this.$store.actions.login()
           this.$router.push("/");
         } else {
